@@ -1,0 +1,91 @@
+---
+layout: post
+title:  "Parsing with blocks"
+date:   2014-06-01 22:47:53
+categories: Engineering
+---
+
+Converting structures can help every developer to really power up efficiency.
+
+Good examples for this are layout frameworks like WebKit or Android UI which
+generally uses XML. In that case XML represents the structure of
+views very efficient while CSS provides better support for
+providing style customization by providing style classes and
+their inheritance.
+
+These languages by their-selves really target a domain specific problem
+in a great way but by just adding some scripting capability to
+them they becomes even more powerful.
+
+One great example of this is the CSS extension
+[SASS](http://sass-lang.com/guide).
+It brings CSS much further then the W3C specifications
+by providing state of the art scripting language functionalities like nesting,
+pre-processing, variables or mixins.
+
+{% highlight css %}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+{% endhighlight %}
+
+Being able to write or extend languages with writing parsers feels magic
+and really provides power.
+
+## Internal vs. external domain specific languages
+
+Domain specific languages are named as such because they are
+created for a specific purpose.
+
+While CSS is an external DSL because it creates its own grammer,
+[Specta](https://github.com/specta/specta) and
+[Expecta](https://github.com/specta/expecta) are good examples for
+internal DSL languages which treat its super language
+in a way that it looks like a new gammer.
+
+### External DSL (CSS):
+{% highlight css %}
+
+ul {
+  background-color: green;
+  text-color: rgb(133, 145, 112);
+}
+
+{% endhighlight %}
+
+Has its custom rules for its language.
+
+### Internal DSL
+
+{% highlight c %}
+expect([bar isBar]).to.equal(YES);
+{% endhighlight %}
+
+C syntax is used in a way that the code really highlights the semantics.
+
+> Internal DSL share the syntax with their super languages.
+
+## parsingWithBlocks
+
+While writing internal DSLs is easy and requires just some creativity
+in language design, the evaluation of external
+DSLs requires some more investigation.
+
+External DSLs must be compiled to another language
+or evaluated by an interpreter. In both cases
+a parser is required in order to find and notify syntactical issues,
+extrating DSL commands and their structure as well as converting it into
+an target structure or language to finally run.
+
+[ParsingWithBlocks](https://speakerdeck.com/chriseidhof/parsing-with-blocks)
+is an interesting functional approach which I've seen at
+CocoaHeads in Hamburg presented by [Chris Eidhof](https://github.com/chriseidhof/parsingwithblocks).
+
+I continue with writing hands-on samples soon ...

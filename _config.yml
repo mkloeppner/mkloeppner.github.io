@@ -1,0 +1,12 @@
+# Site settings
+title: mkloeppner
+email: mkloeppner@me.com
+description: "Swift, Objective-C and C developer blog"
+host: "localhost"
+port: 8080
+baseurl: ""
+url: "http://mkloeppner.com"
+
+# Build settings
+markdown: kramdown
+permalink: pretty

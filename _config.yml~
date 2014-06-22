@@ -1,0 +1,10 @@
+# Site settings
+title: mkloeppner
+email: mkloeppner@me.com
+description: "Objective-C and C developer blog about passionate API development"
+baseurl: ""
+url: "http://mkloeppner.com"
+
+# Build settings
+markdown: kramdown
+permalink: pretty
