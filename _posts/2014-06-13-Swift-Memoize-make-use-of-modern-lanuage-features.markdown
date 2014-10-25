@@ -31,14 +31,14 @@ in order to focus on the tutorial.
 
 A simple implementation of Fibonacci would look like the following:
 
-{% highlight objective-c %}
+```swift
 func fibonacci(n : Int) -> Int {
 	if n > 2 {
 		return fibonacci(n - 1) + fibonacci(n - 2)
 	}
 	return 1
 }
-{% endhighlight %}
+```
 
 So what does that mean for our implementation.
 Lets say we calculate the Fibonacci of 12, so we need to calculate the Fibonacci of 11 and 10.
@@ -58,7 +58,7 @@ memoize just returns that value instead of let the algorithm do the hard work ag
 
 But how to implement that? Here is an implementation:
 
-{% highlight objective-c %}
+```swift
 var resultCache = Dictionary<Int, Int>()
 func memoizedFibonacci(n : Int) -> Int {
     if !resultCache.indexForKey(n) {
@@ -70,7 +70,7 @@ func memoizedFibonacci(n : Int) -> Int {
     }
     return resultCache[n]!
 }
-{% endhighlight %}
+```
 
 Not that bad. The repeated calculations has been removed now but the code seems
 complex and does not really seem to be clean.
@@ -84,13 +84,13 @@ This comes due the fact that memoizedFibonacci now mixes multiple responsibiliti
 So with other words there is a lot of boilerplate code around
 the simple calculation that our interest spotlights of:
 
-{% highlight objective-c %}
+```swift
 if n > 2 {
 	result = memoizedFibonacci(n - 1) + memoizedFibonacci(n - 2)
 } else {
 	result = 1
 }
-{% endhighlight %}
+```
 
 Another unfortunate result from this implementation is that there is that the
 dictionary that saves the result has a global scope.
@@ -109,13 +109,13 @@ Since Swift enforces type safety once a variable or constant has being assigned,
 you can work with that variable and pass it around without loosing the type.
 You can not imagine what i've seen in JavaScript so often:
 
-{% highlight javascript %}
+```swift
 myObject = [3, 5, 6, 8];
 
 // A lot of code here ....
 
 myObject = "Test";
-{% endhighlight %}
+```
 
 myObject is changing its type during runtime and this has its dis- and advantages.
 However, if some implementation depends on myObject being an Array after assigning it
@@ -135,7 +135,7 @@ a method called memoize. This method takes our Fibonacci
 function and calls it if and only if its really necessary by the fact that
 no cached value exists.
 
-{% highlight objective-c %}
+```swift
 func memoize(fibonacci: (Int) -> (Int)) -> (Int) -> (Int) {
     var cache = Dictionary<Int,Int>()
     func memoized(n: Int) -> Int {
@@ -156,31 +156,31 @@ func fibonacci(n : Int) -> Int {
 
 var memoized_fibonacci = memoize(fibonacci)
 
-{% endhighlight %}
+```
 
 We have serval things to highlight in this code.
 
-{% highlight objective-c %}
+```swift
 func memoize(fibonacci: (Int) -> (Int)) -> (Int) -> (Int) { }
-{% endhighlight %}
+```
 The memoize function receives a method (indicated by () -> ()) and returns a new one
 with the same parameter and return type.
 
-{% highlight objective-c %}
+```swift
 func fibonacci(n : Int) -> Int {
 		if (n > 2) {
 				return memoized_fibonacci(n - 1) + memoized_fibonacci(n - 2)
 		}
 		return 1
 }
-{% endhighlight %}
+```
 Our fibonacci method slightly changed comparing to the simple implementation.
 Instead of calling fibonacci within the fibonacci method itself we are accessing
 an variable that is not defined yet.
 
-{% highlight objective-c %}
+```swift
 var memoized_fibonacci = memoize(fibonacci)
-{% endhighlight %}
+```
 This variable is the memoized version of fibonacci. Since memoized_fibonacci is now the function
 to call in order to run the calculation, it exists when fibonacci is going to call it.
 
@@ -198,11 +198,11 @@ types wants to memoize its results?
 
 One solution would be to declare multiple interfaces:
 
-{% highlight objective-c %}
+```swift
 func imemoizei(obj :Int) -> Int {}
 func dmemoized(obj :Double) -> Double {}
 func fmemoizef(obj :Float) -> Float {}
-{% endhighlight %}
+```
 
 This solution would really end up in declaring a lot of interfaces and redundant code.
 Assume that dmemoized and fmemoizef has been copied from imemoizei. If imemoizei contains
@@ -216,13 +216,13 @@ code generation there its only possible to support classes that are already know
 
 Another solution is working with AnyObject:
 
-{% highlight objective-c %}
+```swift
 func memoized(obj :AnyObject) -> AnyObject() {}
-{% endhighlight %}
+```
 
 So know the implementation would look like:
 
-{% highlight objective-c %}
+```swift
 func memoize(fibonacci: (AnyObject) -> (AnyObject)) -> (AnyObject) -> (AnyObject) {
 // The compiler complains that AnyObject is nor Hashable or Equatable
     var cache = Dictionary<AnyObject, AnyObject>()
@@ -234,7 +234,7 @@ func memoize(fibonacci: (AnyObject) -> (AnyObject)) -> (AnyObject) -> (AnyObject
     }
     return memoized
 }
-{% endhighlight %}
+```
 
 The compiler won't accept that implementation because Dictionary needs an object type as key
 that supports the protocols Hashable and Equatable in order to work as expected.
@@ -247,7 +247,7 @@ to support some protocols or needs to be subclasses of another class.
 
 But how does that look like:
 
-{% highlight objective-c %}
+```swift
 func memoize<T :Hashable, U>(fibonacci: (T) -> (U)) -> (T) -> (U) {
     var cache = Dictionary<T,U>()
     func memoized(n: T) -> U {
@@ -258,7 +258,7 @@ func memoize<T :Hashable, U>(fibonacci: (T) -> (U)) -> (T) -> (U) {
     }
     return memoized
 }
-{% endhighlight %}
+```
 
 Memoize got some constraints after its function name.
 
