@@ -15,48 +15,48 @@ A tupel is a comma separated lists of values within curly braces:
 
 A tuple can contain the same value multiple times:
 
-{% highlight objective-c %}
+```swift
 (10,10,6,8,10)
-{% endhighlight %}
+```
 
 A tuple can be assigned to a variable or constant:
 
-{% highlight objective-c %}
+```swift
 let x = (10,10,6,8,10)
-{% endhighlight %}
+```
 
 A constant or variable containing a tuple can be decomposed:
-{% highlight objective-c %}
+```swift
 let x = (10,10,6,8,10)
 
 let (a,b,c,d,e,f) = x;
-{% endhighlight %}
+```
 
 Decomposing do not require to assign every value a constant or variable.
 A position within a tuple can be skipped by '_'
-{% highlight objective-c %}
+```swift
 let x = (10,10,6,8,10)
 
 let (_,b,_,d,_,_) = x;
-{% endhighlight %}
+```
 
 A tuple can be have identifier for its values:
-{% highlight objective-c %}
+```swift
 let x = (age: 10, level: 10, 6, 8, 10)
 println(x.age)
-{% endhighlight %}
+```
 
 Identifiers can be used for decomposing a tuple:
-{% highlight objective-c %}
+```swift
 let x = (age: 10, level: 10, 6, 8, 10)
-{% endhighlight %}
+```
 
 Tuple signatures contain types instead of values:
-{% highlight objective-c %}
+```swift
 (String, String, Int, UInt, UInt)
-{% endhighlight %}
+```
 
 Also Tuple signatures can have a identifier for every associated type:
-{% highlight objective-c %}
+```swift
 (name: String, lastName: String, age: UInt)
-{% endhighlight %}
+```
