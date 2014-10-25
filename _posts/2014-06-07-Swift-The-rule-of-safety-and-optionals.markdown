@@ -95,7 +95,7 @@ Objective-C class but just by writing a bunch of code and loosing the intend.
 
 Lets compare the Swift Person with an Objective-C derivat:
 
-```swift
+```objc
 @interface Person
 
 @property(strong, nonatomic) NSDate *birthday;
