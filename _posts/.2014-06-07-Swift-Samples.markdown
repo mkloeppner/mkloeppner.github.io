@@ -9,9 +9,9 @@ categories: Language
 
 A tupel is a comma separated lists of values within curly braces:
 
-{% highlight objective-c %}
+```swift
 (3,5,6,8,10)
-{% endhighlight %}
+```
 
 A tuple can contain the same value multiple times:
 
