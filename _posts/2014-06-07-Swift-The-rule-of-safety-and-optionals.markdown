@@ -38,7 +38,7 @@ optional.
 
 So lets take a look into a class declaration:
 
-{% highlight objective-c %}
+```swift
 class Person {
 
   let birthday :NSDate
@@ -48,14 +48,14 @@ class Person {
   } // Property 'self.birthday' not initialized
 
 }
-{% endhighlight %}
+```
 
 Do you wonder why the compiler is complaining? It is the rule of safety that fails.
 Imagine your class person has a method that relies on birthday, say for example a method
 that calculates the age. The value of that method will be invalid until
 the birthday of the person will be set.
 
-{% highlight objective-c %}
+```swift
 class Person {
 
     let birthday :NSDate
@@ -76,7 +76,7 @@ class Person {
     // Read more about that in // TODO insert link
 
 }
-{% endhighlight %}
+```
 
 So what to do now? Should we set the date just to an value that does not make
  any sense? No of course not. We can pass it by the initializer as parameter or
@@ -95,7 +95,7 @@ Objective-C class but just by writing a bunch of code and loosing the intend.
 
 Lets compare the Swift Person with an Objective-C derivat:
 
-{% highlight objective-c %}
+```swift
 @interface Person
 
 @property(strong, nonatomic) NSDate *birthday;
@@ -117,7 +117,7 @@ Lets compare the Swift Person with an Objective-C derivat:
 }
 
 @end
-{% endhighlight %}
+```
 
 First of all we have to clarify what do we return when self.birthday is nil.
 This is not that obvious. You can use NSNotFound, return just -1 because you come
@@ -136,7 +136,7 @@ Note that I left extra space comparing to Objective-C code in order to
 help readers to read. A direct comparison can be found at the end of that
 section.
 
-{% highlight objective-c %}
+```swift
 class Person {
 
     let birthday :NSDate? // By adding an question mark
@@ -163,14 +163,14 @@ class Person {
     // Mare about that later
 
 }
-{% endhighlight %}
+```
 
 As mentioned I left in a lot of boilerplate just to let the example be
 comprehensible for beginners but lets take a look how it looks like
 if we compare with the same spacing and intend rules that we used for the
 Objective-C example:
 
-{% highlight objective-c %}
+```swift
 class Person {
     let birthday :NSDate?
 
@@ -183,7 +183,7 @@ class Person {
         return nil;
     }
 }
-{% endhighlight %}
+```
 
 So much smaller with so much intend in it.
 
